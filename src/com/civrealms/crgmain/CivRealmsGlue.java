@@ -55,12 +55,12 @@ import org.bukkit.scheduler.BukkitTask;
 import vg.civcraft.mc.namelayer.GroupManager;
 import vg.civcraft.mc.namelayer.NameAPI;
 
-public class CivrealmsPVE extends JavaPlugin implements PluginMessageListener {
+public class CivRealmsGlue extends JavaPlugin implements PluginMessageListener {
     //Other classes/meta plugin stuff
     private GroupManager gm = NameAPI.getGroupManager();
     CombatTagPlus cpt = null; 
     GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("US/Pacific"));
-    public static Logger LOG = Logger.getLogger("CivRealmsPVE");
+    public static Logger LOG = Logger.getLogger("CivRealmsGlue");
     public ProtocolManager pmgr;
     //###########
     public static String world;
@@ -189,12 +189,12 @@ public class CivrealmsPVE extends JavaPlugin implements PluginMessageListener {
         this.getCommand("noIPGracePeriod").setExecutor(new CommandHandler(this));
         this.getCommand("dust").setExecutor(new CommandHandler(this));
         
-        try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream("./plugins/CivrealmsPVE/usedTheirTeleport.ser"))){
+        try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream("./plugins/CivRealmsGlue/usedTheirTeleport.ser"))){
             Object obj = oi.readObject();
             this.usedTheirTeleport = (HashSet<UUID>)obj;
         } catch (Exception e){LOG.info("Loading usedTheirTeleport hash failed!");}
         
-        try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream("./plugins/CivrealmsPVE/noAutoReplant.ser"))){
+        try (ObjectInputStream oi = new ObjectInputStream(new FileInputStream("./plugins/CivRealmsGlue/noAutoReplant.ser"))){
             Object obj = oi.readObject();
             this.noAutoReplant = (HashSet<UUID>)obj;
         } catch (Exception e){LOG.info("Loading noAutoReplant hash failed!");}
@@ -224,7 +224,7 @@ public class CivrealmsPVE extends JavaPlugin implements PluginMessageListener {
         BukkitRunnable r = new BukkitRunnable() { 
             public void run() {
                 if (System.currentTimeMillis() - lastSlowLoop > slowLoopTicks*50){
-                    BukkitTask slow = (new SlowPlayerLoopTask(CivrealmsPVE.this)).runTaskAsynchronously(CivrealmsPVE.this);
+                    BukkitTask slow = (new SlowPlayerLoopTask(CivRealmsGlue.this)).runTaskAsynchronously(CivRealmsGlue.this);
                     lastSlowLoop = System.currentTimeMillis();
                 }
             }
@@ -239,11 +239,11 @@ public class CivrealmsPVE extends JavaPlugin implements PluginMessageListener {
 	// Fired when plugin is disabled
 	@Override
 	public void onDisable() {
-        try (ObjectOutputStream oo = new ObjectOutputStream(new FileOutputStream("./plugins/CivrealmsPVE/usedTheirTeleport.ser"))){
+        try (ObjectOutputStream oo = new ObjectOutputStream(new FileOutputStream("./plugins/CivRealmsGlue/usedTheirTeleport.ser"))){
             oo.writeObject(this.usedTheirTeleport);
         } catch (Exception e){LOG.info("Saving usedTheirTeleport hash failed!");}
         
-        try (ObjectOutputStream oo = new ObjectOutputStream(new FileOutputStream("./plugins/CivrealmsPVE/noAutoReplant.ser"))){
+        try (ObjectOutputStream oo = new ObjectOutputStream(new FileOutputStream("./plugins/CivRealmsGlue/noAutoReplant.ser"))){
             oo.writeObject(this.noAutoReplant);
         } catch (Exception e){LOG.info("Saving noAutoReplant hash failed!");}
 
@@ -488,7 +488,7 @@ public class CivrealmsPVE extends JavaPlugin implements PluginMessageListener {
                     ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                     String command = "banstick " + p.getDisplayName() + " Autobanned for being kicked too many times in one day for various infractions like ban evasion, pearl evasion, alts at high load, VPNs, etc. Contact reddit.com/r/civrealms 'message the moderators' to sort the issue out.";
                     Bukkit.dispatchCommand(console, command);
-                    LOG.info("[CivrealmsPVE]: Banned a player, " + p.getDisplayName() + " for being kicked too many times in a day for other things.");
+                    LOG.info("[CivRealmsGlue]: Banned a player, " + p.getDisplayName() + " for being kicked too many times in a day for other things.");
                 }
             });
         }

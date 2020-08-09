@@ -17,7 +17,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 
 //other bukkit
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import java.util.HashSet;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -51,8 +51,8 @@ import org.bukkit.util.Vector;
  */
 public class PVPListener implements Listener {
     
-	private CivrealmsPVE plugin;
-	public static Logger LOG = Logger.getLogger("CivRealmsPVE");
+	private CivRealmsGlue plugin;
+	public static Logger LOG = Logger.getLogger("CivRealmsGlue");
     private long lastMiteSweep = 0;
     HashMap<UUID,Long> lastDamagedByEntity = new HashMap<UUID,Long>();
     HashMap<String,Long> lastJoined = new HashMap<String,Long>();
@@ -61,7 +61,7 @@ public class PVPListener implements Listener {
     private HashMap<UUID,Long> webCooldown = new HashMap<UUID,Long>();
     private HashSet<Material> foods = new HashSet<Material>();
     
-	public PVPListener(CivrealmsPVE plugin) {
+	public PVPListener(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
     

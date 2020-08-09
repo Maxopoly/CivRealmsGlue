@@ -1,6 +1,6 @@
 package com.civrealms.delayedtasks;
 
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -23,10 +23,10 @@ public class DelayedSync {
     
     public static class AntiBoatSinkCheck extends BukkitRunnable {
 
-        private final CivrealmsPVE plugin;
+        private final CivRealmsGlue plugin;
         private HashMap<UUID, Location> boatLocs = new HashMap<UUID, Location>();
 
-        public AntiBoatSinkCheck(CivrealmsPVE plugin) {
+        public AntiBoatSinkCheck(CivRealmsGlue plugin) {
             this.plugin = plugin;
         }
 

@@ -5,7 +5,7 @@
  */
 package com.civrealms.crgpve;
 
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import isaac.bastion.BastionBlock;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,10 +22,10 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class FingerprintListener implements Listener {
-    private CivrealmsPVE plugin;
+    private CivRealmsGlue plugin;
     private HashMap<Location,int[]> pendingInventories = new HashMap<Location,int[]>();
     
-    public FingerprintListener(CivrealmsPVE plugin) {
+    public FingerprintListener(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
     

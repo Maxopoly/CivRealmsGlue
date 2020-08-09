@@ -1,6 +1,6 @@
 package com.civrealms.crgpve;
 
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,9 +30,9 @@ import org.bukkit.material.MaterialData;
  */
 public class TreeFelling implements Listener {
     
-    private CivrealmsPVE plugin;
+    private CivRealmsGlue plugin;
     
-    public TreeFelling(CivrealmsPVE plugin) {
+    public TreeFelling(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
         

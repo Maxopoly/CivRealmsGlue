@@ -1,6 +1,6 @@
 package com.civrealms.crgcrops;
 
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import com.civrealms.crgpve.SekkritClass;
 import java.util.ArrayList;
 import org.bukkit.CropState;
@@ -18,9 +18,9 @@ import org.bukkit.material.Crops;
  * @author Crimeo
  */
 public class BlockBreakListenerCrops  implements Listener {
-    private CivrealmsPVE plugin; 
+    private CivRealmsGlue plugin; 
 	
-    public BlockBreakListenerCrops(CivrealmsPVE plugin) {
+    public BlockBreakListenerCrops(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
     

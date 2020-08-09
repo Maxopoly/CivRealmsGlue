@@ -1,6 +1,6 @@
-name: CivrealmsPVE
-main: com.civrealms.crgmain.CivrealmsPVE
-version: 2.0
+name: CivRealmsGlue
+main: com.civrealms.crgmain.CivRealmsGlue
+version: 3.0
 depend: [Citadel, Bastion, CombatTagPlus, RealisticBiomes, BanStick, HiddenOre, ExilePearl, JukeAlert, ProtocolLib]
 commands:
    chisel:

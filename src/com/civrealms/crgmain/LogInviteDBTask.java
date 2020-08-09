@@ -18,9 +18,9 @@ class LogInviteDBTask extends BukkitRunnable {
         Player inviter;
         String invitee;
         String worldName;
-        CivrealmsPVE plugin;
+        CivRealmsGlue plugin;
 
-        public LogInviteDBTask(CivrealmsPVE plugin, String worldName, Player inviter, String invitee){
+        public LogInviteDBTask(CivRealmsGlue plugin, String worldName, Player inviter, String invitee){
             this.worldName = worldName;
             this.inviter = inviter;
             this.invitee = invitee;

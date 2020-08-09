@@ -1,7 +1,7 @@
 package com.civrealms.crgpve;
 
 //java
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import static com.civrealms.crgpve.SekkritClass.valuablesWriter;
 import java.util.Arrays;
 import java.util.List;
@@ -33,10 +33,10 @@ import org.bukkit.entity.LivingEntity;
 public class BlockBreakListenerNonCrops implements Listener {
 
 	Random rand = new Random();
-	private CivrealmsPVE plugin;
-	public static Logger LOG = Logger.getLogger("CivRealmsPVE");
+	private CivRealmsGlue plugin;
+	public static Logger LOG = Logger.getLogger("CivRealmsGlue");
     
-    public BlockBreakListenerNonCrops(CivrealmsPVE plugin) {
+    public BlockBreakListenerNonCrops(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
 

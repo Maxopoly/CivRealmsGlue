@@ -1,6 +1,6 @@
 package com.civrealms.crgpve;
 
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import static com.civrealms.crgpve.PVEMiscellaneousListener.LOG;
 import com.programmerdan.minecraft.banstick.data.BSPlayer;
 import isaac.bastion.BastionBlock;
@@ -28,9 +28,9 @@ public class AltAccountListener  implements Listener {
     private static HashMap<Integer,Set<UUID>> altFamiliesInverse = new HashMap<Integer,Set<UUID>>();
     private static HashMap<String,Long> lastBlocked = new HashMap<String,Long>();
     int nextFamilyID = 0;
-    private CivrealmsPVE plugin;
+    private CivRealmsGlue plugin;
     
-    public AltAccountListener(CivrealmsPVE plugin) {
+    public AltAccountListener(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
     public static HashMap<UUID,Integer> getAltFamilies(){

@@ -4,7 +4,7 @@ package com.civrealms.crgpve;
  * @author Crimeo
  */
 
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -28,10 +28,10 @@ public class ContrabandListener implements Listener {
 	// enchanted books, various armors and tools, and some things like gold bars
 	// without lore
 
-	private CivrealmsPVE plugin;
-	public static Logger LOG = Logger.getLogger("CivRealmsPVE");
+	private CivRealmsGlue plugin;
+	public static Logger LOG = Logger.getLogger("CivRealmsGlue");
 
-	public ContrabandListener(CivrealmsPVE plugin) {
+	public ContrabandListener(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
 

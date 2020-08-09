@@ -1,7 +1,7 @@
 package com.civrealms.crgpve;
 
 //java
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import com.civrealms.delayedtasks.DelayedAsync.ProcessVote;
 import com.vexsoftware.votifier.model.Vote;
 import java.util.ArrayList;
@@ -106,8 +106,8 @@ import org.bukkit.command.ConsoleCommandSender;
 public class PVEMiscellaneousListener implements Listener {
 
 	Random rand = new Random();
-	private CivrealmsPVE plugin;
-	public static Logger LOG = Logger.getLogger("CivRealmsPVE");
+	private CivRealmsGlue plugin;
+	public static Logger LOG = Logger.getLogger("CivRealmsGlue");
     private HashMap<String, Boolean> bedMode = new HashMap<String, Boolean>(); // UUID and mode
     private HashMap<UUID,Long> postJoinTellCooldown = new HashMap<UUID,Long>();
     Block mostRecentCancel;
@@ -125,7 +125,7 @@ public class PVEMiscellaneousListener implements Listener {
     private HashMap<UUID, Long> nonEnderFrameCooldown = new HashMap<UUID, Long>();
     HashMap<Material, Integer> reinforcementHierarchy = new HashMap<Material, Integer>();
 
-    public PVEMiscellaneousListener(CivrealmsPVE plugin) {
+    public PVEMiscellaneousListener(CivRealmsGlue plugin) {
         this.plugin = plugin;
         reinforcementHierarchy.put(Material.STONE, 1);
         reinforcementHierarchy.put(Material.IRON_INGOT, 2);

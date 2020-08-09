@@ -1,6 +1,6 @@
 package com.civrealms.crgpve;
 
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -22,10 +22,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class CustomMobDrops implements Listener  {
 	
 	Random rand = new Random();
-	private CivrealmsPVE plugin;
-	public static Logger LOG = Logger.getLogger("CivRealmsPVE");
+	private CivRealmsGlue plugin;
+	public static Logger LOG = Logger.getLogger("CivRealmsGlue");
 
-	public CustomMobDrops(CivrealmsPVE plugin) {
+	public CustomMobDrops(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
     

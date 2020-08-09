@@ -35,11 +35,11 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class CommandHandler implements CommandExecutor {
 
-    private CivrealmsPVE plugin;
-    public static Logger LOG = Logger.getLogger("CivRealmsPVE");
+    private CivRealmsGlue plugin;
+    public static Logger LOG = Logger.getLogger("CivRealmsGlue");
     private HashMap<UUID,Long> dustCooldown = new HashMap<UUID,Long>();
 
-    public CommandHandler(CivrealmsPVE plugin) {
+    public CommandHandler(CivRealmsGlue plugin) {
         this.plugin = plugin;
     }
 

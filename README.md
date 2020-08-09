@@ -1,2 +1,2 @@
-# CivrealmsPVE
+# CivRealmsGlue
 catchall plugin

@@ -3,8 +3,8 @@ package com.civrealms.delayedtasks;
 /**
  * @author Crimeo
  */
-import com.civrealms.crgmain.CivrealmsPVE;
-import static com.civrealms.crgmain.CivrealmsPVE.LOG;
+import com.civrealms.crgmain.CivRealmsGlue;
+import static com.civrealms.crgmain.CivRealmsGlue.LOG;
 import com.civrealms.crgpve.AltAccountListener;
 import com.civrealms.crgpve.SekkritClass;
 import com.google.common.io.ByteArrayDataOutput;
@@ -48,15 +48,15 @@ public class DelayedAsync {
 
     public static class SlowPlayerLoopTask extends BukkitRunnable {
 
-        private final CivrealmsPVE plugin;
+        private final CivRealmsGlue plugin;
 
-        public SlowPlayerLoopTask(CivrealmsPVE plugin) {
+        public SlowPlayerLoopTask(CivRealmsGlue plugin) {
             this.plugin = plugin;
         }
 
         @Override
         public void run() { //(async)
-            plugin.LOG.info("[CivrealmsPVE] loopstart " + System.currentTimeMillis());
+            plugin.LOG.info("[CivRealmsGlue] loopstart " + System.currentTimeMillis());
 
             HashSet<String> allPlayers = new HashSet<String>(); //fill up in world loops already used below, will use for VPN check.
 
@@ -163,7 +163,7 @@ public class DelayedAsync {
                                         }
                                     });
                                     plugin.updateSlowLoopKicks(p, 1);
-                                    plugin.LOG.info("[CivrealmsPVE]: kicked " + p.getDisplayName() + " for pearl evasion (no ban just kick once per minute).");
+                                    plugin.LOG.info("[CivRealmsGlue]: kicked " + p.getDisplayName() + " for pearl evasion (no ban just kick once per minute).");
                                 }
                             }
                             for (BSPlayer alt : alts) {
@@ -174,7 +174,7 @@ public class DelayedAsync {
                                         }
                                     });
                                     plugin.updateSlowLoopKicks(p, 1);
-                                    plugin.LOG.info("[CivrealmsPVE]: kicked " + p.getDisplayName() + " for pearl evasion (no ban just kick once per minute).");
+                                    plugin.LOG.info("[CivRealmsGlue]: kicked " + p.getDisplayName() + " for pearl evasion (no ban just kick once per minute).");
                                     break;
                                 }
                             }
@@ -199,13 +199,13 @@ public class DelayedAsync {
                             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                             String command = "banstick " + p.getDisplayName() + " Autobanned for detected ban evasion. Modmail Admins on reddit.com/r/civrealms modmail with any questions or if in error.";
                             Bukkit.dispatchCommand(console, command);
-                            plugin.LOG.info("[CivrealmsPVE]: looptask kicked and banned a player, " + p.getDisplayName());
+                            plugin.LOG.info("[CivRealmsGlue]: looptask kicked and banned a player, " + p.getDisplayName());
                         }
                     } else {
                         try {
-                            plugin.LOG.info("[CivrealmsPVE] slowlooptask bsplayer null: " + p.getDisplayName());
+                            plugin.LOG.info("[CivRealmsGlue] slowlooptask bsplayer null: " + p.getDisplayName());
                         } catch (NullPointerException e) {
-                            plugin.LOG.info("[CivrealmsPVE] slowlooptask bsplayer null: trying to get name also nulled.");
+                            plugin.LOG.info("[CivRealmsGlue] slowlooptask bsplayer null: trying to get name also nulled.");
                         }
                     }
                 }
@@ -261,7 +261,7 @@ public class DelayedAsync {
                             }
                         });
                         plugin.updateSlowLoopKicks(bukkitPlayer, 1); //do want to eventually ban them before they can crawl 3 blocks at a time to someone's house.
-                        plugin.LOG.info("[CivrealmsPVE]: looptask kicked a player for new ISP, " + bukkitPlayer.getDisplayName() + " and ISP: " + connection);
+                        plugin.LOG.info("[CivRealmsGlue]: looptask kicked a player for new ISP, " + bukkitPlayer.getDisplayName() + " and ISP: " + connection);
                         continue;
                     }
                     min_unix_join = rs.getLong(3) * 1000; //for millis
@@ -274,14 +274,14 @@ public class DelayedAsync {
                     } else if (connection == null) {
                         //but playerName doesn't
                         if (bukkitPlayer != null && System.currentTimeMillis() - min_unix_join > plugin.noIPGracePeriod) {
-                            plugin.LOG.info("[CivrealmsPVE] plugin thinks this player joined " + (System.currentTimeMillis() - min_unix_join) + " ago.");
+                            plugin.LOG.info("[CivRealmsGlue] plugin thinks this player joined " + (System.currentTimeMillis() - min_unix_join) + " ago.");
                             Bukkit.getScheduler().runTask(plugin, new Runnable() {
                                 public void run() {
                                     bukkitPlayer.kickPlayer(ChatColor.RED + "Please follow these steps in order! " + ChatColor.GOLD + "1) " + ChatColor.WHITE + "Switch off your VPN, if any. " + ChatColor.GOLD + " 2) " + ChatColor.WHITE + "Wait 5 full minutes and try logging on again. " + ChatColor.GOLD + "3) " + ChatColor.WHITE + "Ask for help at /r/civrealms 'message the moderators' or on our discord at https://discord.gg/ez42Ac The system is having trouble verifying your IP address as residential.");
                                 }
                             });
                             plugin.updateSlowLoopKicks(bukkitPlayer, 4);
-                            plugin.LOG.info("[CivrealmsPVE]: looptask kicked a player for X minute IP unresolved, " + bukkitPlayer.getDisplayName());
+                            plugin.LOG.info("[CivRealmsGlue]: looptask kicked a player for X minute IP unresolved, " + bukkitPlayer.getDisplayName());
                         }
                         continue;
                     }
@@ -297,7 +297,7 @@ public class DelayedAsync {
                                     }
                                 });
                                 plugin.updateSlowLoopKicks(player, 4);
-                                plugin.LOG.info("[CivrealmsPVE]: looptask kicked and banned a player VPN severity 1, " + player.getDisplayName());
+                                plugin.LOG.info("[CivRealmsGlue]: looptask kicked and banned a player VPN severity 1, " + player.getDisplayName());
                                 continue;
                             } else { //3.0 right level so basically 100% VPN
                                 Bukkit.getScheduler().runTask(plugin, new Runnable() {
@@ -308,14 +308,14 @@ public class DelayedAsync {
                                 ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                                 String command = "banstick " + player.getDisplayName() + " You have been banned for VPS / VPN Proxy use. Your IP is especially high risk, so you were not kicked first. Modmail the admins at www.reddit.com/r/Civrealms to discuss and clear you to play.";
                                 Bukkit.dispatchCommand(console, command);
-                                plugin.LOG.info("[CivrealmsPVE]: looptask kicked and banned a player VPN severity 2, " + player.getDisplayName());
+                                plugin.LOG.info("[CivRealmsGlue]: looptask kicked and banned a player VPN severity 2, " + player.getDisplayName());
                                 continue;
                             }
                         }
-                        plugin.getLogger().info("[CivrealmsPVE] slowLoopTask kicked a player on connection: " + connection + " player = " + playerName + " for VPN");
+                        plugin.getLogger().info("[CivRealmsGlue] slowLoopTask kicked a player on connection: " + connection + " player = " + playerName + " for VPN");
                     } else {
                         if (!plugin.avgProxies.containsKey(connection)) {
-                            plugin.getLogger().info("[CivrealmsPVE] unknown connection found and not otherwise handled: " + connection + " player = " + playerName);
+                            plugin.getLogger().info("[CivRealmsGlue] unknown connection found and not otherwise handled: " + connection + " player = " + playerName);
                         }
                         //but otherwise do nothing, just log.
                     }
@@ -328,15 +328,15 @@ public class DelayedAsync {
                 e.printStackTrace();
             }
 
-            plugin.LOG.info("[CivrealmsPVE] loopend " + System.currentTimeMillis());
+            plugin.LOG.info("[CivRealmsGlue] loopend " + System.currentTimeMillis());
         }
     }
 
     public static class BeaconDisable extends BukkitRunnable {
 
-        private final CivrealmsPVE plugin;
+        private final CivRealmsGlue plugin;
 
-        public BeaconDisable(CivrealmsPVE plugin) {
+        public BeaconDisable(CivRealmsGlue plugin) {
             this.plugin = plugin;
         }
 
@@ -365,10 +365,10 @@ public class DelayedAsync {
     
     public static class SaveFingerPrintDB extends BukkitRunnable {
         
-        private final CivrealmsPVE plugin;
+        private final CivRealmsGlue plugin;
         private final Connection connection;
         
-        public SaveFingerPrintDB(CivrealmsPVE plugin, Connection connection) {
+        public SaveFingerPrintDB(CivRealmsGlue plugin, Connection connection) {
             this.plugin = plugin;
             this.connection = connection;
         }
@@ -415,12 +415,12 @@ public class DelayedAsync {
     
     public static class UnInviteDB extends BukkitRunnable { //check in command handler that both players exist and get the UUID.
         
-        private final CivrealmsPVE plugin;
+        private final CivRealmsGlue plugin;
         private final Connection connection;
         Player inviter;
         String invitee;
         
-        public UnInviteDB(CivrealmsPVE plugin, Connection connection, Player inviter, String invitee) {
+        public UnInviteDB(CivRealmsGlue plugin, Connection connection, Player inviter, String invitee) {
             this.plugin = plugin;
             this.connection = connection;
             this.inviter = inviter;
@@ -444,12 +444,12 @@ public class DelayedAsync {
     
     public static class CheckOTTInvite extends BukkitRunnable { // do the checks for player being new and blah blah in the command handler. This is DB checks only.
         
-        private final CivrealmsPVE plugin;
+        private final CivRealmsGlue plugin;
         private final Connection connection;
         Player invitee;
         String inviter;
         
-        public CheckOTTInvite(CivrealmsPVE plugin, Connection connection, Player invitee, String inviter) {
+        public CheckOTTInvite(CivRealmsGlue plugin, Connection connection, Player invitee, String inviter) {
             this.plugin = plugin;
             this.connection = connection;
             this.inviter = inviter;
@@ -472,7 +472,7 @@ public class DelayedAsync {
                     String world = result.getString(7);
 
                     if (display_name_inviter.equalsIgnoreCase(inviter)){ //this entry in DB is the one invitee requested
-                        LOG.info("[CivRealmsPVE] ott invite DB log, inviter: " + display_name_inviter + ", invitee: " + display_name_invitee + ", timestamps: " + (System.currentTimeMillis() - timestamp) + " world string: " + world + " invitee world string: " + invitee.getWorld().getName());
+                        LOG.info("[CivRealmsGlue] ott invite DB log, inviter: " + display_name_inviter + ", invitee: " + display_name_invitee + ", timestamps: " + (System.currentTimeMillis() - timestamp) + " world string: " + world + " invitee world string: " + invitee.getWorld().getName());
                         if (System.currentTimeMillis() - timestamp < 600000){
                             if (world.equalsIgnoreCase(invitee.getWorld().getName())){
                                 plugin.setPostOTTInventory(invitee);
@@ -534,10 +534,10 @@ public class DelayedAsync {
     
     public static class WhitelistISP extends BukkitRunnable {
         
-        private final CivrealmsPVE plugin;
+        private final CivRealmsGlue plugin;
         private final  String connection;
         
-        public WhitelistISP(CivrealmsPVE plugin, String connection) {
+        public WhitelistISP(CivRealmsGlue plugin, String connection) {
             this.plugin = plugin;
             this.connection = connection;
         }
@@ -560,13 +560,13 @@ public class DelayedAsync {
     
     public static class DustForPrints extends BukkitRunnable { //check for having a kit on hand in the command handler not here
         
-        private final CivrealmsPVE plugin;
+        private final CivRealmsGlue plugin;
         private final Player player;
         private final int x;
         private final int y;
         private final int z;
         
-        public DustForPrints(CivrealmsPVE plugin, Player player, int x, int y, int z) {
+        public DustForPrints(CivRealmsGlue plugin, Player player, int x, int y, int z) {
             this.plugin = plugin;
             this.player = player;
             this.x = x;
@@ -609,10 +609,10 @@ public class DelayedAsync {
     
     public static class SetMainCharacter extends BukkitRunnable {
         
-        private final CivrealmsPVE plugin;
+        private final CivRealmsGlue plugin;
         private final Player player;
         
-        public SetMainCharacter(CivrealmsPVE plugin, Player player) {
+        public SetMainCharacter(CivRealmsGlue plugin, Player player) {
             this.plugin = plugin;
             this.player = player;
         }
@@ -641,12 +641,12 @@ public class DelayedAsync {
     
     public static class ProcessVote extends BukkitRunnable {
         
-        private final CivrealmsPVE plugin;
+        private final CivRealmsGlue plugin;
         private final OfflinePlayer player;
         private final long time;
         private final String website;
         
-        public ProcessVote(CivrealmsPVE plugin, OfflinePlayer player, long time, String website) {
+        public ProcessVote(CivRealmsGlue plugin, OfflinePlayer player, long time, String website) {
             this.plugin = plugin;
             this.player = player;
             this.time = time;

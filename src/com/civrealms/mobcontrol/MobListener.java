@@ -1,6 +1,6 @@
 package com.civrealms.mobcontrol;
 
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -15,9 +15,9 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 
 public class MobListener implements Listener {
-    private CivrealmsPVE plugin;
+    private CivRealmsGlue plugin;
         
-    public MobListener(CivrealmsPVE plugin) {
+    public MobListener(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
     

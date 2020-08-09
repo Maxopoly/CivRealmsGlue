@@ -1,6 +1,6 @@
 package com.civrealms.crgpve;
 
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import static com.civrealms.crgpve.PVEMiscellaneousListener.LOG;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,11 +30,11 @@ import org.bukkit.projectiles.ProjectileSource;
  * @author Crimeo
  */
 public class AdminToolsListener  implements Listener {
-    private CivrealmsPVE plugin;
+    private CivRealmsGlue plugin;
     private ArrayList<Player> players = new ArrayList<>();
     private HashMap<UUID, Integer> sepIndex = new HashMap<>();
     
-    public AdminToolsListener(CivrealmsPVE plugin) {
+    public AdminToolsListener(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
     

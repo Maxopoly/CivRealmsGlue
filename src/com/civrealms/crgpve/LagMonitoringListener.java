@@ -1,6 +1,6 @@
 package com.civrealms.crgpve;
 
-import com.civrealms.crgmain.CivrealmsPVE;
+import com.civrealms.crgmain.CivRealmsGlue;
 import static com.civrealms.crgpve.PVEMiscellaneousListener.LOG;
 import java.util.HashMap;
 import org.bukkit.Chunk;
@@ -24,9 +24,9 @@ public class LagMonitoringListener  implements Listener {
     private HashMap<Chunk,Integer> repeaterActivityMap = new HashMap<Chunk,Integer>();
     private HashMap<Chunk,Integer> chunkLoadActivityMap = new HashMap<Chunk,Integer>();
     private HashMap<Chunk,Integer> observerActivityMap = new HashMap<Chunk,Integer>();
-    private CivrealmsPVE plugin;
+    private CivRealmsGlue plugin;
     
-    public LagMonitoringListener(CivrealmsPVE plugin) {
+    public LagMonitoringListener(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
     
@@ -37,7 +37,7 @@ public class LagMonitoringListener  implements Listener {
         if (hopperActivityMap.containsKey(c)){
             hopperActivityMap.put(c,hopperActivityMap.get(c) + 1);
             if (hopperActivityMap.get(c) % 10000 == 0){
-                LOG.info("[CivrealmsPVE][LAGCHECK] Hopper Activity so far in chunk at " + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + " has reached " + hopperActivityMap.get(c) + " move events.");
+                LOG.info("[CivRealmsGlue][LAGCHECK] Hopper Activity so far in chunk at " + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + " has reached " + hopperActivityMap.get(c) + " move events.");
             }
         } else {
             hopperActivityMap.put(c,1);
@@ -51,7 +51,7 @@ public class LagMonitoringListener  implements Listener {
         if (pistonActivityMap.containsKey(c)){
             pistonActivityMap.put(c,pistonActivityMap.get(c) + 1);
             if (pistonActivityMap.get(c) % 1000 == 0){
-                LOG.info("[CivrealmsPVE][LAGCHECK] Piston Activity so far in chunk at " + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + " has reached " + pistonActivityMap.get(c) + " move events.");
+                LOG.info("[CivRealmsGlue][LAGCHECK] Piston Activity so far in chunk at " + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + " has reached " + pistonActivityMap.get(c) + " move events.");
             }
         } else {
             pistonActivityMap.put(c,1);
@@ -66,7 +66,7 @@ public class LagMonitoringListener  implements Listener {
             if (repeaterActivityMap.containsKey(c)){
                 repeaterActivityMap.put(c,repeaterActivityMap.get(c) + 1);
                 if (repeaterActivityMap.get(c) % 5000 == 0){
-                    LOG.info("[CivrealmsPVE][LAGCHECK] Repeater Activity so far in chunk at " + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + " has reached " + repeaterActivityMap.get(c) + " events.");
+                    LOG.info("[CivRealmsGlue][LAGCHECK] Repeater Activity so far in chunk at " + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + " has reached " + repeaterActivityMap.get(c) + " events.");
                 }
             } else {
                 repeaterActivityMap.put(c,1);
@@ -82,7 +82,7 @@ public class LagMonitoringListener  implements Listener {
             if (observerActivityMap.containsKey(c)){
                 observerActivityMap.put(c,observerActivityMap.get(c) + 1);
                 if (observerActivityMap.get(c) % 10000 == 0){
-                    LOG.info("[CivrealmsPVE][LAGCHECK] Observer Activity so far in chunk at " + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + " has reached " + observerActivityMap.get(c) + " events.");
+                    LOG.info("[CivRealmsGlue][LAGCHECK] Observer Activity so far in chunk at " + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + " has reached " + observerActivityMap.get(c) + " events.");
                 }
             } else {
                 observerActivityMap.put(c,1);
@@ -97,7 +97,7 @@ public class LagMonitoringListener  implements Listener {
         if (chunkLoadActivityMap.containsKey(c)){
             chunkLoadActivityMap.put(c,chunkLoadActivityMap.get(c) + 1);
             if (chunkLoadActivityMap.get(c) % 50 == 0){
-                LOG.info("[CivrealmsPVE][LAGCHECK] Chunk Load Activity so far in chunk at " + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + " has reached " + chunkLoadActivityMap.get(c) + " events.");
+                LOG.info("[CivRealmsGlue][LAGCHECK] Chunk Load Activity so far in chunk at " + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + " has reached " + chunkLoadActivityMap.get(c) + " events.");
             }
         } else {
             chunkLoadActivityMap.put(c,1);
@@ -108,7 +108,7 @@ public class LagMonitoringListener  implements Listener {
     public void onCreatureLagCheck(CreatureSpawnEvent event){
         int nearbyEntityCount = (event.getLocation().getWorld().getNearbyEntities(event.getLocation(), 2, 2, 2)).size();
         if (nearbyEntityCount > 10 && Math.random() < 0.1){
-            LOG.info("[CivRealmsPVE][LAGCHECK] Breeding Entity Proximity Alert at " + event.getLocation().getX() + ", " + event.getLocation().getY() + ", " + event.getLocation().getZ());
+            LOG.info("[CivRealmsGlue][LAGCHECK] Breeding Entity Proximity Alert at " + event.getLocation().getX() + ", " + event.getLocation().getY() + ", " + event.getLocation().getZ());
         }
     }
     

@@ -39,9 +39,9 @@ import org.bukkit.inventory.PlayerInventory;
  */
 public class LobbyManager implements Listener{
     
-	private CivrealmsPVE plugin;
+	private CivRealmsGlue plugin;
     
-    public LobbyManager(CivrealmsPVE plugin) {
+    public LobbyManager(CivRealmsGlue plugin) {
 		this.plugin = plugin;
 	}
     
