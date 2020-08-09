@@ -1,0 +1,74 @@
+name: CivRealmsGlue
+main: com.civrealms.crgmain.CivRealmsGlue
+version: 3.0
+depend: [Citadel, Bastion, CombatTagPlus, RealisticBiomes, BanStick, HiddenOre, ExilePearl, JukeAlert, ProtocolLib]
+commands:
+   chisel:
+      description: Toggle chisel modes on diamond picks
+      usage: /chisel
+   ottinvite:
+      description: invite a player to one time teleport to you or refresh an invitation.
+      usage: /ottinvite [player display name]
+   ottuninvite:
+      description: Rescind an ott invitation
+      usage: /ottuninvite [player display name]
+   ott:
+      description: One time teleport to one player (who must accept the request). This will clear your inventory if the request is accepted.
+      usage: /ott [player]
+   togglereplant:
+      description: Turn auto replant feature on or off (default on)
+      usage: /togglereplant
+   compareprints:
+      description: compare two sheets of fingeprints one in each hand
+      usage: type command with a fingerprint sheet in each hand.
+   createprints:
+      description: create a sheet of your fingerpreints with your or someone else's name on top
+      usage: /createprints | /createprints [fakename]
+   lookupprints:
+      description: for admins, lookup a player's fingerprints from the DB
+      usage: /lookupprints [name]
+   PVPsetKBV:
+      description: no description set.
+      usage: no usage set.
+   PVPsetKBA:
+      description: no description set.
+      usage: no usage set.
+   PVPsetRV:
+      description: no description set.
+      usage: no usage set.
+   PVPsetRA:
+      description: no description set.
+      usage: no usage set.
+   PVPsetNoTicks:
+      description: no description set.
+      usage: no usage set.
+   PVPtoggleWoodTesting:
+      description: no description set.
+      usage: no usage set.
+   inventorydl:
+      description: no description set.
+      usage: no usage set.
+   ispbl:
+      description: no description set.
+      usage: no usage set.
+   ispwl:
+      description: no description set.
+      usage: no usage set.
+   removethorns:
+      description: no description set.
+      usage: no usage set.
+   vote:
+      description: list vote links.
+      usage: /vote
+   main:
+      description: set this alt as the one to get daily stamina, etc.
+      usage: /main
+   slowloop:
+      description: no description set.
+      usage: no usage set.
+   noIPGracePeriod:
+      description: no description set.
+      usage: no usage set.
+   dust:
+      description: Dust for fingerprints.
+      usage: /dust
