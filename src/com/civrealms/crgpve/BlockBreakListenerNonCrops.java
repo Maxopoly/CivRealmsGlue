@@ -2,7 +2,6 @@ package com.civrealms.crgpve;
 
 //java
 import com.civrealms.crgmain.CivRealmsGlue;
-import static com.civrealms.crgpve.SekkritClass.valuablesWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
