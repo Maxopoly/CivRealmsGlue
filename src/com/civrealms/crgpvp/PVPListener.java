@@ -191,7 +191,7 @@ public class PVPListener implements Listener {
                 if (event instanceof EntityDamageByEntityEvent){
                     damagerUUID = ((EntityDamageByEntityEvent) event).getDamager().getUniqueId().toString();
                 }
-                LOG.info("PVE(P): NaN Health? : " + ((LivingEntity)event.getEntity()).getHealth() + " at " + nanent.getX() + ", " + nanent.getY() + ", " + nanent.getZ() + " damager: " + damagerUUID);
+                LOG.info("CRG(P): NaN Health? : " + ((LivingEntity)event.getEntity()).getHealth() + " at " + nanent.getX() + ", " + nanent.getY() + ", " + nanent.getZ() + " damager: " + damagerUUID);
                 event.getEntity().remove();
                 return;
             }
@@ -213,7 +213,7 @@ public class PVPListener implements Listener {
                             for (int z = pl.getBlockZ()-2; z < pl.getBlockZ()+2; z++){
                                 if (w.getBlockAt(x,254,z).getType() != Material.BEDROCK){
                                     event.setCancelled(true);
-                                    LOG.info("PVE: Drown/Suffocation/Void damage negated near portal after login for " + player.getDisplayName() + ".");
+                                    LOG.info("CRG: Drown/Suffocation/Void damage negated near portal after login for " + player.getDisplayName() + ".");
                                     return;
                                 }
                             }
@@ -233,7 +233,7 @@ public class PVPListener implements Listener {
                             for (int z = pl.getBlockZ()-2; z < pl.getBlockZ()+2; z++){
                                 if (w.getBlockAt(x,0,z).getType() != Material.BEDROCK){
                                     event.setCancelled(true);
-                                    LOG.info("PVE: Fall damage negated near portal after login for " + player.getDisplayName() + ".");
+                                    LOG.info("CRG: Fall damage negated near portal after login for " + player.getDisplayName() + ".");
                                     return;
                                 }
                             }

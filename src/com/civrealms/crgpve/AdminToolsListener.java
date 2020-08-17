@@ -145,9 +145,9 @@ public class AdminToolsListener  implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
 	public void info(BlockPlaceEvent event) {
 		if(event.getBlock().getType() == Material.CAKE_BLOCK && event.getPlayer().isOp()){
-            LOG.info("PVE SECRET CAKE INFO LOG: " + "world name: " + event.getBlock().getWorld().getName());
-            LOG.info("PVE SECRET CAKE INFO LOG: " + "off hand item: " + event.getPlayer().getInventory().getItemInOffHand().getType().name());
-            LOG.info("PVE SECRET CAKE INFO LOG: " + "block below: " + event.getBlock().getRelative(0,-1,0).getType().name());  
+            LOG.info("CRG SECRET CAKE INFO LOG: " + "world name: " + event.getBlock().getWorld().getName());
+            LOG.info("CRG SECRET CAKE INFO LOG: " + "off hand item: " + event.getPlayer().getInventory().getItemInOffHand().getType().name());
+            LOG.info("CRG SECRET CAKE INFO LOG: " + "block below: " + event.getBlock().getRelative(0,-1,0).getType().name());  
             if (event.getPlayer().isSneaking()){
                 List<LivingEntity> ents = event.getBlock().getWorld().getLivingEntities();
                 for (LivingEntity ent:ents){

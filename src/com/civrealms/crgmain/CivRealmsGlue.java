@@ -233,7 +233,7 @@ public class CivRealmsGlue extends JavaPlugin implements PluginMessageListener {
         
         //These loops don't have any dynamic parameters:
         new BeaconDisable(this).runTaskTimerAsynchronously(this,200,7); //10 second delay after restart, then once every third of a second
-        new AntiBoatSinkCheck(this).runTaskTimer(this,200,20); //10 second delay after restart, then once every 1 seconds
+        new AntiBoatSinkCheck(this).runTaskTimer(this,200,60); //10 second delay after restart, then once every 3 seconds
 	}
 
 	// Fired when plugin is disabled

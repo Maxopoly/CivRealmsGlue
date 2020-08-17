@@ -2,6 +2,7 @@ package com.civrealms.crgpve;
 
 //java
 import com.civrealms.crgmain.CivRealmsGlue;
+import com.civrealms.delayedtasks.DelayedAsync;
 import com.civrealms.delayedtasks.DelayedAsync.ProcessVote;
 import com.vexsoftware.votifier.model.Vote;
 import java.util.ArrayList;
@@ -102,6 +103,7 @@ import vg.civcraft.mc.citadel.ReinforcementMode;
 import com.vexsoftware.votifier.model.VotifierEvent;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.scheduler.BukkitTask;
  
 public class PVEMiscellaneousListener implements Listener {
 
@@ -132,17 +134,27 @@ public class PVEMiscellaneousListener implements Listener {
         reinforcementHierarchy.put(Material.DIAMOND, 3);
         reinforcementHierarchy.put(Material.BEDROCK, 4);
     }
+    
+    @EventHandler
+    public void death(PlayerDeathEvent e) {
+        BukkitRunnable r = new BukkitRunnable() { 
+            public void run() {
+                ((Player)e.getEntity()).spigot().respawn();
+            }
+        };
+        r.runTaskLater(plugin,20);
+    }
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVotifierEvent(VotifierEvent event) {
-        this.plugin.getLogger().info("[PVE] Vote Received via listener: " + event.getVote());
+        this.plugin.getLogger().info("[CRG] Vote Received via listener: " + event.getVote());
         Vote v = event.getVote();
         String website = v.getServiceName();
         long time = v.getLocalTimestamp();
         String playerName = v.getUsername();
         OfflinePlayer player = Bukkit.getOfflinePlayer(playerName);
         if (player != null) {
-            this.plugin.getLogger().info("[PVE]: Attempting vote, offline player is not null");
+            this.plugin.getLogger().info("[CRG]: Attempting vote, offline player is not null");
             new ProcessVote(plugin, player, time, website).runTaskAsynchronously(plugin);
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             String command = "say " + ChatColor.DARK_GREEN + "Thanks " + ChatColor.DARK_GREEN + "for " + ChatColor.DARK_GREEN 
@@ -219,7 +231,7 @@ public class PVEMiscellaneousListener implements Listener {
                     //is fast diving
                     event.setCancelled(true);
                     event.getPlayer().sendMessage(ChatColor.RED + "No crouch diving.");
-                    LOG.info("[PVE] Crouch diving: " + event.getPlayer().getDisplayName());
+                    LOG.info("[CRG] Crouch diving: " + event.getPlayer().getDisplayName());
                 }
             }
             double horizVelSquared = Math.pow(event.getTo().getZ() - event.getFrom().getZ(),2) + Math.pow(event.getTo().getX() - event.getFrom().getX(),2);
@@ -231,7 +243,7 @@ public class PVEMiscellaneousListener implements Listener {
                 //event.setCancelled(true);
                 //event.getPlayer().sendMessage(ChatColor.RED + "No sprint swimming.");
                 event.getPlayer().setSprinting(false);
-                LOG.info("[PVE] Sprint Swimming: " + event.getPlayer().getDisplayName());
+                LOG.info("[CRG] Sprint Swimming: " + event.getPlayer().getDisplayName());
             }
             double dist = event.getTo().distance(event.getFrom());
         
@@ -342,7 +354,7 @@ public class PVEMiscellaneousListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
 	public void onEatRealGapple(PlayerItemConsumeEvent event) {
 		if (event.getItem().getType() == Material.GOLDEN_APPLE && event.getItem().getDurability() == 1 && !event.getItem().hasItemMeta()){
-            LOG.info("PVE: " + event.getPlayer().getDisplayName() + " attempted to eat a true god apple.");
+            LOG.info("CRG: " + event.getPlayer().getDisplayName() + " attempted to eat a true god apple.");
             event.setCancelled(true);
 		}
 	}
@@ -552,13 +564,13 @@ public class PVEMiscellaneousListener implements Listener {
                                 return; //exactly the same item and lore, just a blending anvil action, is fine, should take into account steel and everything.
                             }
                             if (!hasmetaone){
-                                LOG.info("PVE: cancelled repair, second item has no meta");
+                                LOG.info("CRG: cancelled repair, second item has no meta");
                             } else if (!event.getInventory().getItem(1).getItemMeta().hasLore()){
-                                LOG.info("PVE: cancelled repair, second item has no lore");
+                                LOG.info("CRG: cancelled repair, second item has no lore");
                             } else if (!event.getInventory().getItem(0).getItemMeta().getLore().equals(event.getInventory().getItem(1).getItemMeta().getLore())){
-                                LOG.info("PVE: cancelled repair, lores don't match, lore 0: " + event.getInventory().getItem(0).getItemMeta().getLore() + " lore 1: " + event.getInventory().getItem(1).getItemMeta().getLore());
+                                LOG.info("CRG: cancelled repair, lores don't match, lore 0: " + event.getInventory().getItem(0).getItemMeta().getLore() + " lore 1: " + event.getInventory().getItem(1).getItemMeta().getLore());
                             } else {
-                                LOG.info("PVE: cancelled repair... some other reason");
+                                LOG.info("CRG: cancelled repair... some other reason");
                             }
                             event.setCancelled(true);
 						}
@@ -803,7 +815,7 @@ public class PVEMiscellaneousListener implements Listener {
                 && yCoordFrom - (int)yCoordFrom < 0.2 //first 1/5th of a block to reduce spam and help ensure they're actually leaping from that ghost SURFACE
                 && System.currentTimeMillis() - timeSinceLastCancel < 200 //has been less than half a second since a block cancellation
                 && (event.getFrom().getBlock().getRelative(0,-1,0).equals(mostRecentCancel) || event.getFrom().getBlock().equals(mostRecentCancel))){ //the block cancelled was the one right beneath the guy
-            LOG.info("PVE: Player " + event.getPlayer().getDisplayName() + " possible ghost blocking. Start: " + event.getFrom().getBlock().getType().name() + 
+            LOG.info("CRG: Player " + event.getPlayer().getDisplayName() + " possible ghost blocking. Start: " + event.getFrom().getBlock().getType().name() + 
                     " Underneath: " + event.getFrom().getBlock().getRelative(0,-1,0).getType().name() + " item in hand: " + event.getPlayer().getInventory().getItemInMainHand().getType().name() + 
                     " blockCancelled: " + mostRecentCancelType.name() + " fraction: " + (yCoordFrom - (int)yCoordFrom));
             for (Player p : event.getPlayer().getWorld().getPlayers()){
@@ -1351,7 +1363,6 @@ public class PVEMiscellaneousListener implements Listener {
                     if (playerBlock.getRelative(x,y,z).getType() == Material.BED_BLOCK){
                         Material aboveFoot = getFootOfBedLoc(playerBlock.getRelative(x,y,z)).getBlock().getRelative(0,1,0).getType();
                         if (aboveFoot == Material.AIR){
-                            //p.sendMessage("new pve bed loc x:" + playerBlock.getRelative(x,y,z).getLocation().add(0.5,0,0.5).getX() + ", Z:" + playerBlock.getRelative(x,y,z).getLocation().add(0.5,0,0.5).getZ());
                             return playerBlock.getRelative(x,y,z).getLocation().add(0.5,0,0.5);
                         } else {
                             p.sendMessage(ChatColor.RED + "The foot of your bed needs air above it. Bed is obstructed.");
@@ -1368,7 +1379,6 @@ public class PVEMiscellaneousListener implements Listener {
                     if (playerBlock.getRelative(x,y,z).getType() == Material.BED_BLOCK){
                         Material aboveFoot = getFootOfBedLoc(playerBlock.getRelative(x,y,z)).getBlock().getRelative(0,1,0).getType();
                         if (aboveFoot == Material.AIR){
-                            //p.sendMessage("new pve bed loc x:" + playerBlock.getRelative(x,y,z).getLocation().add(0.5,0,0.5).getX() + ", Z:" + playerBlock.getRelative(x,y,z).getLocation().add(0.5,0,0.5).getZ());
                             return playerBlock.getRelative(x,y,z).getLocation().add(0.5,0,0.5);
                         } else {
                             p.sendMessage(ChatColor.RED + "The foot of your bed needs air above it. Bed is obstructed.");
@@ -1385,7 +1395,7 @@ public class PVEMiscellaneousListener implements Listener {
                     if (playerBlock.getRelative(x,y,z).getType() == Material.BED_BLOCK){
                         Material aboveFoot = getFootOfBedLoc(playerBlock.getRelative(x,y,z)).getBlock().getRelative(0,1,0).getType();
                         if (aboveFoot == Material.AIR){
-                            p.sendMessage("new pve bed loc x:" + playerBlock.getRelative(x,y,z).getLocation().add(0.5,0,0.5).getX() + ", Z:" + playerBlock.getRelative(x,y,z).getLocation().add(0.5,0,0.5).getZ());
+                            //p.sendMessage("new crg bed loc x:" + playerBlock.getRelative(x,y,z).getLocation().add(0.5,0,0.5).getX() + ", Z:" + playerBlock.getRelative(x,y,z).getLocation().add(0.5,0,0.5).getZ());
                             return playerBlock.getRelative(x,y,z).getLocation().add(0.5,0,0.5);
                         } else {
                             p.sendMessage(ChatColor.RED + "The foot of your bed needs air above it. Bed is obstructed.");

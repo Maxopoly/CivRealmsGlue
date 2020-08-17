@@ -91,7 +91,6 @@ public class BlockBreakListenerCrops  implements Listener {
 				|| event.getBlock().getType().equals(Material.POTATO)
 				|| event.getBlock().getType().equals(Material.BEETROOT_BLOCK))) {
             if (!com.civrealms.crgmain.CitadelChecks.playerHasCropAccess(event.getBlock(), event.getPlayer())){
-                //LOG.info("PVE block under reinforced code block");
                 vg.civcraft.mc.citadel.reinforcement.PlayerReinforcement pr = ((vg.civcraft.mc.citadel.reinforcement.PlayerReinforcement)vg.civcraft.mc.citadel.Citadel.getReinforcementManager().getReinforcement(event.getBlock().getRelative(0, -1, 0)));
                 if (pr.canAccessCrops(event.getPlayer())){
                     return;
@@ -130,7 +129,6 @@ public class BlockBreakListenerCrops  implements Listener {
             }
 		} else if (event.getBlock().getType().equals(Material.NETHER_WARTS)) {
             if (!com.civrealms.crgmain.CitadelChecks.playerHasCropAccess(event.getBlock(), event.getPlayer())){
-                //LOG.info("PVE block under reinforced code block");
                 vg.civcraft.mc.citadel.reinforcement.PlayerReinforcement pr = ((vg.civcraft.mc.citadel.reinforcement.PlayerReinforcement)vg.civcraft.mc.citadel.Citadel.getReinforcementManager().getReinforcement(event.getBlock().getRelative(0, -1, 0)));
                 if (pr.canAccessCrops(event.getPlayer())){
                 } else{

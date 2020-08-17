@@ -114,7 +114,7 @@ public class DelayedAsync {
                                     });
                                     eligibleToKick.remove(p);
                                     plugin.updateSlowLoopKicks(p, 1);
-                                    plugin.LOG.info("[PVE] altLag kick, player " + p.getDisplayName());
+                                    plugin.LOG.info("[CRG] altLag kick, player " + p.getDisplayName());
                                     break;
                                 }
                                 index++;
@@ -157,24 +157,26 @@ public class DelayedAsync {
                         if (!w.getName().equalsIgnoreCase("Civrealms_Lobby")) {
                             if (pearledPlayers.contains(p.getUniqueId()) && !w.getName().equals("prison_the_end")) { //(don't kick people from prison world for being in prison lol)
                                 if (p.isOnline()) {
-                                    Bukkit.getScheduler().runTask(plugin, new Runnable() {
-                                        public void run() {
+                                    //Bukkit.getScheduler().runTask(plugin, new Runnable() {
+                                        //public void run() {
                                             //p.kickPlayer("Autokicked, for detected pearl evasion. Modmail Admins on reddit.com/r/civrealms modmail with any questions or if in error.");
-                                        }
-                                    });
+                                        //}
+                                    //});
+                                    pearledPlayers.remove(p.getUniqueId()); // they will get re-added next loop. But we need to account for people freed a few minutes later, etc. so they don't just get banned right after freeing
                                     plugin.updateSlowLoopKicks(p, 1);
-                                    plugin.LOG.info("[CivRealmsGlue]: kicked " + p.getDisplayName() + " for pearl evasion (no ban just kick once per minute).");
+                                    plugin.LOG.info("[CivRealmsGlue]: incremented penalty " + p.getDisplayName() + " for pearl evasion.");
                                 }
                             }
                             for (BSPlayer alt : alts) {
-                                if (pearledPlayers.contains(alt.getUUID()) && !w.getName().equals("prison_the_end") && p.isOnline()) {
-                                    Bukkit.getScheduler().runTask(plugin, new Runnable() {
-                                        public void run() {
+                                if (pearledPlayers.contains(alt.getUUID()) && !w.getName().equals("prison_the_end") && Bukkit.getPlayer(alt.getUUID()) != null && Bukkit.getPlayer(alt.getUUID()).isOnline()) { //think this was the bug, was checking is main was online thus people with many alts got +1 penalty point no matter what per alt in existence.
+                                    //Bukkit.getScheduler().runTask(plugin, new Runnable() {
+                                        //public void run() {
                                             //p.kickPlayer("Autokicked, for detected pearl evasion. Modmail Admins on reddit.com/r/civrealms modmail with any questions or if in error.");
-                                        }
-                                    });
+                                        //}
+                                    //});
+                                    pearledPlayers.remove(p.getUniqueId()); // they will get re-added next loop. But we need to account for people freed a few minutes later, etc. so they don't just get banned right after freeing
                                     plugin.updateSlowLoopKicks(p, 1);
-                                    plugin.LOG.info("[CivRealmsGlue]: kicked " + p.getDisplayName() + " for pearl evasion (no ban just kick once per minute).");
+                                    plugin.LOG.info("[CivRealmsGlue]: incremented penalty " + p.getDisplayName() + " for pearl evasion.");
                                     break;
                                 }
                             }
@@ -289,7 +291,7 @@ public class DelayedAsync {
                     if (connection != null && !connection.equals("") && plugin.avgProxies.containsKey(connection) && plugin.avgProxies.get(connection) > 2.3) { //configThreshold){
                         Player player = Bukkit.getPlayer(playerName);
                         if (player != null) {
-                            plugin.LOG.info("[CIVPVE] Slowlooptask VPN section, player is: " + player.getDisplayName() + " and connection is: " + connection + " and proxy is: " + plugin.avgProxies.get(connection));
+                            plugin.LOG.info("[CRG] Slowlooptask VPN section, player is: " + player.getDisplayName() + " and connection is: " + connection + " and proxy is: " + plugin.avgProxies.get(connection));
                             if (plugin.avgProxies.get(connection) < 3.0) { //higher than threshold but less than 100%, maybe VPN maybe not, be more polite
                                 Bukkit.getScheduler().runTask(plugin, new Runnable() {
                                     public void run() {

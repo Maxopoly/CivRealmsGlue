@@ -260,7 +260,7 @@ public class BlockBreakListenerNonCrops implements Listener {
 			// event.setDropItems(false);
 			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), is);
             event.getBlock().setType(Material.AIR);
-            LOG.info("PVE, Iron Block Dropped at " + event.getBlock().getX() + ", " + event.getBlock().getY() + ", " + event.getBlock().getZ() + " by player " + event.getPlayer().getDisplayName());
+            LOG.info("CRG, Iron Block Dropped at " + event.getBlock().getX() + ", " + event.getBlock().getY() + ", " + event.getBlock().getZ() + " by player " + event.getPlayer().getDisplayName());
 			return;
 		} else if (!isReinforced && event.getBlock().getType() == Material.EMERALD_ORE) {
 			ItemStack is = new ItemStack(Material.EMERALD_ORE, 1);
@@ -327,14 +327,14 @@ public class BlockBreakListenerNonCrops implements Listener {
 			event.setDropItems(false);
 			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), is);
             event.getBlock().setType(Material.AIR);
-            LOG.info("PVE, Glowstone Dropped at " + event.getBlock().getX() + ", " + event.getBlock().getY() + ", " + event.getBlock().getZ() + " by player " + event.getPlayer().getDisplayName());
+            LOG.info("CRG, Glowstone Dropped at " + event.getBlock().getX() + ", " + event.getBlock().getY() + ", " + event.getBlock().getZ() + " by player " + event.getPlayer().getDisplayName());
 			return;
 		} else if (!isReinforced && event.getBlock().getType() == Material.GOLD_BLOCK) {
 			ItemStack is = new ItemStack(Material.GOLD_BLOCK, 1);
 			event.setDropItems(false);
 			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), is);
             event.getBlock().setType(Material.AIR);
-            LOG.info("PVE, Gold Block Dropped at " + event.getBlock().getX() + ", " + event.getBlock().getY() + ", " + event.getBlock().getZ() + " by player " + event.getPlayer().getDisplayName());
+            LOG.info("CRG, Gold Block Dropped at " + event.getBlock().getX() + ", " + event.getBlock().getY() + ", " + event.getBlock().getZ() + " by player " + event.getPlayer().getDisplayName());
 			return;
 		} 
 		if (!isReinforced && event.getBlock().getType() == Material.SAND) {
